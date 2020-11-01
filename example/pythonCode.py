@@ -6,26 +6,25 @@ golangLib = load_go_lib('golangCode.so')
 
 # Integer example
 setup_go_func(golangLib.TestInt, [intGo], intGo)  # Set "TestInt" func with "intGo" input and "intGo" output
-inp = intGo(5)
-res = golangLib.TestInt(inp)
-print(f'Integer example:\n{inp} * 5 -> {res}\n')
+input_data = intGo(5)
+output_result = golangLib.TestInt(input_data)
+print(f'Integer example:\n{input_data} * 5 -> {output_result}\n')
 
 # Float example
 setup_go_func(golangLib.TestFloat, [floatGo], floatGo)  # Set "TestFloat" func with "floatGo" input and "floatGo" output
-inp = floatGo(12.2)
-res = golangLib.TestFloat(inp)
-print(f'Float example:\n{inp} / 2 -> {res}\n')
+input_data = floatGo(12.2)
+output_result = golangLib.TestFloat(input_data)
+print(f'Float example:\n{input_data} / 2 -> {output_result}\n')
 
 # String example
 setup_go_func(golangLib.TestString, [stringGo], stringGo)  # Set "TestString" func with "stringGo" input and "stringGo" output
-inp = str_to_go('World')  # str_to_go(string) - convert python string to golang string
-res = str_to_py(golangLib.TestString(inp))  # str_to_py(string) - convert golang string to python string
-print(f'String example:\n{inp} -> {res}\n')
+input_data = str_to_go('World')  # str_to_go(string) - convert python string to golang string
+output_result = str_to_py(golangLib.TestString(input_data))  # str_to_py(string) - convert golang string to python string
+print(f'String example:\n{input_data} -> {output_result}\n')
 
 # Slice example
 setup_go_func(golangLib.TestSlice, [sliceGo], sliceGo)  # Set "TestSlice" func with "sliceGo" input and "sliceGo" output
-inp = [intGo(123), intGo(456)]  # Slice is containing "intGo" type. ONLY ONE TYPE ALLOWED AT A TIME!
-res = slice_to_list(  # slice_to_list - convert golang slice to python list
-    golangLib.TestSlice(list_to_slice(inp, intGo))
-)
-print(f'Slice (list) example:\n{inp} -> {res}\n')
+input_list = [intGo(123), intGo(456)]  # Slice is containing "intGo" type. ONLY ONE TYPE ALLOWED AT A TIME!
+input_data = list_to_slice(input_list, intGo)
+output_result = slice_to_list(golangLib.TestSlice(input_data))  # slice_to_list - convert golang slice to python list
+print(f'Slice (list) example:\n{input_data} -> {output_result}\n')
