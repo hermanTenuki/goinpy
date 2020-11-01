@@ -1,0 +1,4 @@
+include LICENSE README.md CHANGELOG.txt
+recursive-exclude * *
+recursive-include goinpy *
+recursive-exclude goinpy/__pycache__ *
