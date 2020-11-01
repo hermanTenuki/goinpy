@@ -84,7 +84,7 @@ func TestInt(x int) int {
 ```
 setup_go_func(golangLib.TestInt, [intGo], intGo)
 input_data = intGo(5)
-output_result = golangLib.TestInt(input_data) // 10
+output_result = golangLib.TestInt(input_data)  # 10
 ```
 
 Here we met 2 new functions:
@@ -110,7 +110,7 @@ func TestFloat(x float64) float64 {
 ```
 setup_go_func(golangLib.TestFloat, [floatGo], floatGo)
 input_data = floatGo(12.2)
-output_result = golangLib.TestFloat(input_data) // 6.1
+output_result = golangLib.TestFloat(input_data)  # 6.1
 ```
 
 Here we met 1 new function:
@@ -163,7 +163,7 @@ func TestSlice(x []int) []int {
 setup_go_func(golangLib.TestSlice, [sliceGo], sliceGo)
 input_list = [intGo(123), intGo(456)]
 input_data = list_to_slice(input_list, intGo)
-output_result = slice_to_list(golangLib.TestSlice(input_data))
+output_result = slice_to_list(golangLib.TestSlice(input_data))  # [666, 456]
 ```
 
 Here we met 3 new functions:
