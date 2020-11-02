@@ -2,7 +2,7 @@ name: PyPi Package Upload
 
 on:
   push:
-    branches: [master]
+    branches: [main]
     tags:
       - '*'
 
