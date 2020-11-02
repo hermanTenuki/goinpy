@@ -14,7 +14,7 @@ Then in python code, import it with ```from goinpy import *```.
 
 Most of these examples are represented in the [examples folder](https://github.com/hermanTenuki/goinpy/tree/main/examples).
 
-If that's not enough for you, you can examine code in [tests folder](https://github.com/hermanTenuki/goinpy/tree/main/tests).
+If that's not enough for you, you can examine code in [tests.py](https://github.com/hermanTenuki/goinpy/blob/dev/tests.py).
 
 ### Basic "Hello World!" example
 
