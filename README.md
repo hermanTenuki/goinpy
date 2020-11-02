@@ -1,4 +1,4 @@
-# goinpy - Golang In Python
+# goinpy - Golang In Python Test
 
 This is a python package, which is made to use Golang functions inside Python code more easily.
 
