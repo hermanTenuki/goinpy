@@ -12,6 +12,10 @@ jobs:
     steps:
     - name: Setup Project
       uses: actions/checkout@v2
+    - name: Setup Golang
+      uses: cedrickring/golang-action@1.6.0
+    - name: Recompile .so files
+      run: go build -o examples/golangCode.so -buildmode=c-shared examples/golangCode.go
     - name: Setup Python
       uses: actions/setup-python@v2
       with:

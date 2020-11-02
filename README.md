@@ -201,6 +201,7 @@ Here we met 1 new function:
 ## Notes
 
 - If multiple ```.so``` libraries is imported, make sure they are compiled under different names;
+- Generated ```.so``` file will only work on the same system. For example, if it's generated on Windows, it will not work on Linux or Mac;
 - You can't create slices inside slices (#3);
 - Supported types are: int, float64, string, bool and slice containing any of previous 4 types;
 - Golang function can't return more than 1 variable to python.
