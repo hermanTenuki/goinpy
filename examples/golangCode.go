@@ -13,8 +13,13 @@ package main
 
 import "C"
 import (
-    // "fmt"
+    "fmt"
 )
+
+//export TestFunc
+func TestFunc() {
+    fmt.Println("Hello World!")
+}
 
 //export TestInt
 func TestInt(x, y int) int {
