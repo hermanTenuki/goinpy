@@ -1,4 +1,4 @@
-name: Django Tests Runner
+name: Python Tests Runner
 on:
   push:
     branches: [ master ]
