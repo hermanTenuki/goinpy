@@ -68,6 +68,7 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
+extern void TestFunc();
 extern GoInt TestInt(GoInt x, GoInt y);
 extern GoFloat64 TestFloat(GoFloat64 x);
 extern char* TestString(char* x);

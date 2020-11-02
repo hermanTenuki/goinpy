@@ -4,6 +4,10 @@ from goinpy import *
 # Loading compiled .so library (compile command is in "golangCode.go")
 golangLib = load_go_lib('golangCode.so')
 
+# Hello World example
+golangLib.TestFunc()
+print('')  # \n
+
 # Integer example
 setup_go_func(golangLib.TestInt, [intGo, intGo], intGo)  # Set "TestInt" func with "intGo" inputs and "intGo" output
 input_1 = intGo(5)
@@ -24,7 +28,7 @@ output_result = str_to_py(golangLib.TestString(input_data))  # str_to_py(string)
 print(f'String example:\n{input_data} -> {output_result}\n')
 
 # Slice example
-setup_go_func(golangLib.TestSlice, [sliceGo], sliceGo)
+setup_go_func(golangLib.TestSlice, [intGoSlice], intGoSlice)
 input_list = [intGo(123), intGo(456)]  # Slice is containing "intGo" type. ONLY ONE TYPE ALLOWED AT A TIME!
 input_data = list_to_slice(input_list, intGo)  # list_to_slice - convert python list to golang slice
 output_result = slice_to_list(golangLib.TestSlice(input_data))  # slice_to_list - convert golang slice to python list

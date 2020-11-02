@@ -12,7 +12,9 @@ Then in python code, import it with ```from goinpy import *```.
 
 ## How to use
 
-Most of these examples are represented in the [example folder](example/).
+Most of these examples are represented in the [examples folder](https://github.com/hermanTenuki/goinpy/tree/main/examples).
+
+If that's not enough for you, you can examine code in [tests.py](https://github.com/hermanTenuki/goinpy/blob/dev/tests.py).
 
 ### Basic "Hello World!" example
 
@@ -161,18 +163,18 @@ func TestSlice(x []int) []int {
 ```pythonCode.py```:
 
 ```
-setup_go_func(golangLib.TestSlice, [sliceGo], sliceGo)
+setup_go_func(golangLib.TestSlice, [intGoSlice], intGoSlice)
 input_list = [intGo(123), intGo(456)]
 input_data = list_to_slice(input_list, intGo)
 output_result = slice_to_list(golangLib.TestSlice(input_data))  # [666, 456]
 ```
 
 Here we met 3 new functions:
-- ```sliceGo``` - golang ```slice```;
+- ```intGoSlice``` - golang ```[]int slice```. There is also ```floatGoSlice```, ```stringGoSlice``` and ```boolGoSlice```;
 - ```list_to_slice(list, data_type: None)``` - convert python ```list``` to golang ```slice```.
 First arg is actual list we are converting.
-Second ```data_type``` arg is what type this slice is storing (NOTE THAT SLICE CAN'T STORE DIFFERENT FILE TYPES AT ONCE).
-- ```slice_to_list(slice)``` - convert golang ```slice``` to python ```list```.
+Second additional ```data_type``` arg is what type this slice is storing (NOTE THAT SLICE CAN'T STORE DIFFERENT FILE TYPES AT ONCE).
+- ```slice_to_list(slc)``` - convert golang ```slice``` to python ```list```.
 
 #### Bool example
 
@@ -195,3 +197,16 @@ output_result = golangLib.TestBool(input_data)  # True
 
 Here we met 1 new function:
 - ```boolGo``` - golang ```bool```. No need in converting python bool to golang bool;
+
+## Notes
+
+- If multiple ```.so``` libraries is imported, make sure they are compiled under different names;
+- You can't create slices inside slices (#3);
+- Supported types are: int, float64, string, bool and slice containing any of previous 4 types;
+- Golang function can't return more than 1 variable to python.
+
+## Other
+
+[CHANGELOG](https://github.com/hermanTenuki/goinpy/blob/main/CHANGELOG.md)
+
+[LICENSE](https://github.com/hermanTenuki/goinpy/blob/main/LICENSE)
