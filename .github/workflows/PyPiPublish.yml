@@ -1,9 +1,8 @@
 name: PyPi Package Upload
 
 on:
-  release:
+  push:
     branches: [master]
-    types: [published]
     tags:
       - '*'
 
