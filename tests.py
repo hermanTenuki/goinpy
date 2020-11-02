@@ -5,7 +5,7 @@ import ctypes
 
 class TestLoadGoLib(unittest.TestCase):
     def test_success(self):
-        lib = load_go_lib('golangCode.so')
+        lib = load_go_lib('examples/golangCode.so')
         self.assertEqual(type(lib), ctypes.CDLL)
 
     def test_wrong(self):
