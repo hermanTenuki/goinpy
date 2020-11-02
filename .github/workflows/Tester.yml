@@ -17,6 +17,7 @@ jobs:
       env:
         PROJECT_PATH: "./examples"
     - name: Recompile .so files
+      working-directory: ./examples
       run: |
         go build -o golangCode.so -buildmode=c-shared golangCode.go
     - name: Setup Python
