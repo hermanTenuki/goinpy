@@ -17,8 +17,8 @@ import (
 )
 
 //export TestInt
-func TestInt(x int) int {
-    return x * 2
+func TestInt(x, y int) int {
+    return x + y
 }
 
 //export TestFloat
@@ -42,6 +42,11 @@ func TestString(x *C.char) *C.char {
 func TestSlice(x []int) []int {
     x[0] = 666
     return x
+}
+
+//export TestBool
+func TestBool(x bool) bool {
+    return !(x)
 }
 
 func main() {

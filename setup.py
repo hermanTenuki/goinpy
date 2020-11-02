@@ -4,7 +4,7 @@ with open("README.md", "r") as file:
     long_description = file.read()
 
 setup(name='goinpy',
-      version='0.1',
+      version='0.2',
       description='Use Golang functions inside Python code',
       long_description=long_description,
       long_description_content_type="text/markdown",
