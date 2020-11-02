@@ -1,6 +1,11 @@
 Change Log
 =========================
 
-0.1 (01/11/2020)
+0.1
 -------------------------
 - Release
+
+0.2
+-------------------------
+- Bool type support
+- "list_to_slice" function can be used now without specifying data type

@@ -2,23 +2,23 @@
 
 This is a python package, which is made to use Golang functions inside Python code more easily.
 
-Embedding Golang functions in python can be very handy, for example, if you want to move some big computations from slow Python to more faster Golang and immediatly get result back.
+Embedding Golang functions in python can be very handy, for example, if you want to move some big computations from slow Python to faster Golang and immediately get a result back.
 
 ## Installation
 
 You can install this package from PyPi with ```pip install goinpy```;
 
-Then in python code import it with ```from goinpy import *```.
+Then in python code, import it with ```from goinpy import *```.
 
 ## How to use
 
-Most of these examples represented in [example folder](example/).
+Most of these examples are represented in the [example folder](example/).
 
 ### Basic "Hello World!" example
 
 #### Golang function export
 
-Let's start with exporting simple Golang "Hello World!" function.
+Let's start with exporting a simple Golang "Hello World!" function.
 
 ```
 package main
@@ -43,12 +43,12 @@ Also make sure ```func main() {}``` is exists.
 
 #### Compiling to C
 
-After we made Golang file, for example ```HelloWorld.go```, we need to compile it to C.
+After we made the Golang file, for example, ```HelloWorld.go```, we need to compile it to C.
 We can do it by typing ```go build -o HelloWorld.so -buildmode=c-shared HelloWorld.go``` in terminal.
-This command is also represented in [example/golangCode.go](example/golangCode.go).
+This command is also represented in [example/golangCode.go](https://github.com/hermanTenuki/goinpy/tree/main/example).
 
 If all is okay, we should now see three different files: ```HelloWorld.go```, ```HelloWorld.so```, ```HelloWorld.h```.
-```.so``` is compiled file that we need.
+```.so``` is the compiled file that we need.
 
 #### Call Golang function from Python
 
@@ -64,7 +64,7 @@ golangLib.TestFunc()
 
 Here we just imported all from ```goinpy``` package, loaded compiled C library into ```golangLib```, and called ```TestFunc``` function with it.
 
-After runnning ```python HelloWorld.py``` in terminal, output should be ```Hello World!``` as expected.
+After running ```python HelloWorld.py``` in a terminal, the output should be ```Hello World!``` as expected.
 
 ### Advanced examples with different types
 
@@ -74,25 +74,26 @@ After runnning ```python HelloWorld.py``` in terminal, output should be ```Hello
 
 ```
 //export TestInt
-func TestInt(x int) int {
-    return x * 2
+func TestInt(x, y int) int {
+    return x + y
 }
 ```
 
 ```pythonCode.py```:
 
 ```
-setup_go_func(golangLib.TestInt, [intGo], intGo)
-input_data = intGo(5)
-output_result = golangLib.TestInt(input_data)  # 10
+setup_go_func(golangLib.TestInt, [intGo, intGo], intGo)
+input_1 = intGo(5)
+input_2 = intGo(10)
+output_result = golangLib.TestInt(input_1, input_2)  # 15
 ```
 
 Here we met 2 new functions:
-- ```intGo(int)``` - convert python ```int``` to golang ```int```;
-- ```setup_go_func(func, argtypes=None, restype=None)``` - if Golang function is taking or returning some data, we need to setup this function.
+- ```intGo(int)``` - convert python ```int``` to golang ```int```. You can convert it back by ```some_int.value```;
+- ```setup_go_func(func, arg_types=None, res_type=None)``` - if Golang function is taking or returning some data, we need to setup this function.
 First ```func``` arg is the function we are trying to setup.
-Second ```argtypes``` arg is a list for types this function is waiting.
-Third ```restype``` arg is a type it's returning.
+Second ```arg_types``` arg is a list for types this function is waiting.
+Third ```res_type``` arg is a type it's returning.
 
 #### Float example
 
@@ -143,7 +144,7 @@ output_result = str_to_py(golangLib.TestString(input_data))  # "Hello, World!"
 Here we met 3 new functions:
 - ```stringGo``` - golang ```string```;
 - ```str_to_go(str)``` - convert python ```str``` to golang ```string```;
-- ```str_to_py(str)``` - convert golang ```string``` to python ```str```.
+- ```str_to_py(string)``` - convert golang ```string``` to python ```str```.
 
 #### Slice example
 
@@ -168,7 +169,29 @@ output_result = slice_to_list(golangLib.TestSlice(input_data))  # [666, 456]
 
 Here we met 3 new functions:
 - ```sliceGo``` - golang ```slice```;
-- ```list_to_slice(list, data_type)``` - convert python ```list``` to golang ```slice```.
+- ```list_to_slice(list, data_type: None)``` - convert python ```list``` to golang ```slice```.
 First arg is actual list we are converting.
 Second ```data_type``` arg is what type this slice is storing (NOTE THAT SLICE CAN'T STORE DIFFERENT FILE TYPES AT ONCE).
 - ```slice_to_list(slice)``` - convert golang ```slice``` to python ```list```.
+
+#### Bool example
+
+```golangCode.go```:
+
+```
+//export TestBool
+func TestBool(x bool) bool {
+    return !(x)
+}
+```
+
+```pythonCode.py```:
+
+```
+setup_go_func(golangLib.TestBool, [boolGo], boolGo)
+input_data = False
+output_result = golangLib.TestBool(input_data)  # True
+```
+
+Here we met 1 new function:
+- ```boolGo``` - golang ```bool```. No need in converting python bool to golang bool;
