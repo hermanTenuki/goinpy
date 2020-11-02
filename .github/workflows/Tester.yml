@@ -16,7 +16,8 @@ jobs:
       uses: cedrickring/golang-action@1.6.0
     - name: Recompile .so files
       working-directory: ./examples
-      run: go build -o golangCode.so -buildmode=c-shared golangCode.go
+      run: |
+        go build -o golangCode.so -buildmode=c-shared golangCode.go
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
