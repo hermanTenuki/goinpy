@@ -4,9 +4,11 @@ This is a python package, which is made to use Golang functions inside Python co
 
 Embedding Golang functions in python can be very handy, for example, if you want to move some big computations from slow Python to faster Golang and immediately get a result back.
 
-For now (and probably ever), Golang and Python full function embedding can't be implemented due languages nature, see [issue #6](https://github.com/hermanTenuki/goinpy/issues/6). You can use this package for simple examples, but for advanced stuff, try something else (for example, Python ```requests``` with Golang localhost ```"net/http"``` listener).
-
 Source code is in [goinpy/goinpy.py](./goinpy/goinpy.py).
+
+## Attention! Current state
+
+For now (and probably ever), Golang and Python full function embedding can't be implemented due languages nature, see [issue #6](https://github.com/hermanTenuki/goinpy/issues/6). You can use this package for simple cases, but for advanced stuff, try something else (for example, [go-python/gopy](https://github.com/go-python/gopy), or just simply Python ```requests``` with Golang localhost ```"net/http"``` listener without any straight embedding).
 
 ## Installation
 
