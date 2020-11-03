@@ -10,9 +10,9 @@ command for building .so library:
 */
 
 package main
-
-import "C"
+ 
 import (
+	"C"
     "fmt"
 )
 
