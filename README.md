@@ -4,6 +4,10 @@ This is a python package, which is made to use Golang functions inside Python co
 
 Embedding Golang functions in python can be very handy, for example, if you want to move some big computations from slow Python to faster Golang and immediately get a result back.
 
+For now (and probably ever), Golang and Python full function embedding can't be implemented due languages nature, see [issue #6](https://github.com/hermanTenuki/goinpy/issues/6). You can use this package for simple examples, but for advanced stuff, try something else (for example, Python ```requests``` with Golang localhost ```"net/http"``` listener).
+
+Source code is in [goinpy/goinpy.py](./goinpy/goinpy.py).
+
 ## Installation
 
 You can install this package from PyPi with ```pip install goinpy```;
@@ -12,9 +16,7 @@ Then in python code, import it with ```from goinpy import *```.
 
 ## How to use
 
-Most of these examples are represented in the [examples folder](https://github.com/hermanTenuki/goinpy/tree/main/examples).
-
-If that's not enough for you, you can examine code in [tests.py](https://github.com/hermanTenuki/goinpy/blob/dev/tests.py).
+Most of these examples are represented in the [examples/](./examples) folder.
 
 ### Basic "Hello World!" example
 
@@ -47,7 +49,7 @@ Also make sure ```func main() {}``` is exists.
 
 After we made the Golang file, for example, ```HelloWorld.go```, we need to compile it to C.
 We can do it by typing ```go build -o HelloWorld.so -buildmode=c-shared HelloWorld.go``` in terminal.
-This command is also represented in [example/golangCode.go](https://github.com/hermanTenuki/goinpy/tree/main/example).
+This command is also represented in [example/golangCode.go](./examples/golangCode.go).
 
 If all is okay, we should now see three different files: ```HelloWorld.go```, ```HelloWorld.so```, ```HelloWorld.h```.
 ```.so``` is the compiled file that we need.
@@ -72,7 +74,7 @@ After running ```python HelloWorld.py``` in a terminal, the output should be ```
 
 #### Integer example
 
-```golangCode.go```:
+[golangCode.go](./examples/golangCode.go):
 
 ```
 //export TestInt
@@ -81,7 +83,7 @@ func TestInt(x, y int) int {
 }
 ```
 
-```pythonCode.py```:
+[pythonCode.py](./examples/pythonCode.py):
 
 ```
 setup_go_func(golangLib.TestInt, [intGo, intGo], intGo)
@@ -96,10 +98,11 @@ Here we met 2 new functions:
 First ```func``` arg is the function we are trying to setup.
 Second ```arg_types``` arg is a list for types this function is waiting.
 Third ```res_type``` arg is a type it's returning.
+Also it returns ```func``` arg back for cases when you want to setup function and assign it to variable in one line.
 
 #### Float example
 
-```golangCode.go```:
+[golangCode.go](./examples/golangCode.go):
 
 ```
 //export TestFloat
@@ -108,7 +111,7 @@ func TestFloat(x float64) float64 {
 }
 ```
 
-```pythonCode.py```:
+[pythonCode.py](./examples/pythonCode.py):
 
 ```
 setup_go_func(golangLib.TestFloat, [floatGo], floatGo)
@@ -121,7 +124,7 @@ Here we met 1 new function:
 
 #### String example
 
-```golangCode.go```:
+[golangCode.go](./examples/golangCode.go):
 
 ```
 //export TestString
@@ -135,7 +138,7 @@ func TestString(x *C.char) *C.char {
 Note that for strings, we need to use ```*C.char``` for in and out.
 You can convert between this and normal string by using ```C.GoString(char)``` and ```C.CString(string)```.
 
-```pythonCode.py```:
+[pythonCode.py](./examples/pythonCode.py):
 
 ```
 setup_go_func(golangLib.TestString, [stringGo], stringGo)
@@ -150,7 +153,7 @@ Here we met 3 new functions:
 
 #### Slice example
 
-```golangCode.go```:
+[golangCode.go](./examples/golangCode.go):
 
 ```
 //export TestSlice
@@ -160,7 +163,7 @@ func TestSlice(x []int) []int {
 }
 ```
 
-```pythonCode.py```:
+[pythonCode.py](./examples/pythonCode.py):
 
 ```
 setup_go_func(golangLib.TestSlice, [intGoSlice], intGoSlice)
@@ -178,7 +181,7 @@ Second additional ```data_type``` arg is what type this slice is storing (NOTE T
 
 #### Bool example
 
-```golangCode.go```:
+[golangCode.go](./examples/golangCode.go):
 
 ```
 //export TestBool
@@ -187,7 +190,7 @@ func TestBool(x bool) bool {
 }
 ```
 
-```pythonCode.py```:
+[pythonCode.py](./examples/pythonCode.py):
 
 ```
 setup_go_func(golangLib.TestBool, [boolGo], boolGo)
@@ -201,13 +204,14 @@ Here we met 1 new function:
 ## Notes
 
 - If multiple ```.so``` libraries is imported, make sure they are compiled under different names;
-- Generated ```.so``` file will only work on the same system. For example, if it's generated on Windows, it will not work on Linux or Mac;
-- You can't create slices inside slices (#3);
+- Generated ```.so``` file will only work on the same system. For example, if it's generated on Windows (like in this repo), it will not work on Linux or Mac;
+- You can't create slices inside slices ([issue #3](https://github.com/hermanTenuki/goinpy/issues/3));
 - Supported types are: int, float64, string, bool and slice containing any of previous 4 types;
 - Golang function can't return more than 1 variable to python.
+- In case of any weird error, see [issue #6](https://github.com/hermanTenuki/goinpy/issues/6).
 
 ## Other
 
-[CHANGELOG](https://github.com/hermanTenuki/goinpy/blob/main/CHANGELOG.md)
+[CHANGELOG](./CHANGELOG.md)
 
-[LICENSE](https://github.com/hermanTenuki/goinpy/blob/main/LICENSE)
+[LICENSE](./LICENSE)
